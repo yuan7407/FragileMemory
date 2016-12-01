@@ -55,7 +55,8 @@ Libraries:
  (2) Write : // (NEED THE SOURCE CODE) in Main.cpp
  (3) Save and Run in IDE, open Processing, write down the code for the client.
 
-`import websockets.*;
+````
+import websockets.*;
 WebsocketClient client;
 String address;
 int startTime;
@@ -78,10 +79,11 @@ void draw(){
 void webSocketEvent(String m){
  println(m);
 }
-`
+````
  (4) Then we built up the connection through Unity3D and Processing. We went to assetstore to download the WebSockets asset. There's an example called Echo.unity & Echo.c#. Unity3D(client) has to send a blank message to Processing(server) and call for echo, then the server will send the message back. This is what we called "handshake" process. Handshake process happens the very first time connected with the client and the server, it was happened before data transformation.
 
-`using UnityEngine;
+````
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -114,7 +116,8 @@ public class EchoTest : MonoBehaviour {
 		}
 		w.Close();
 	}
-}`
+}
+````
 
 (5) At this point, we tested with random number between 0 - 100. Then we have to figure out how to use Nerosky Mindwave Data to processing. We install 2 Libraries for processing, one is WebSocket and the other is nerosky( You can clone the .jar file to the sketch so it can be installed directly.). Open the sketch we have in the repository and open your ThinkGear Connector (It works with bluetooth, you have to pair in RED light and connecing in still BLUE light). Run the sketch and see your attentionLevel and your meditationLevel.
 
