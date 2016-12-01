@@ -5,9 +5,8 @@ This is the repository of 2nd Semester Project, Fragile Memory is the project we
 
 ##Project Concept
 
-asldflsjdflajsdfksdfladjfaslkdfasdf
-asldflsjdflajsdfksdfladjfaslkdfasdf
-sjklfdjs
+First of all, we got a topic about memory. Then we search some research about the memory. we find that the fragile memory. It is a good topic which we can develop it a lot. We want to add a freak memory to the others. The VR technology is a very good choice to make a virtual reality experience for humanity. The world in the VR is not real, and the memory we make is not real too. These two things have the same parts.
+We want to let audience have a fragile memory though the experience which we prove. The world in VR is same as the reality, but also has some difference.
 
 
 ##Tools we used
