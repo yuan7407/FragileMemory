@@ -122,3 +122,108 @@ public class EchoTest : MonoBehaviour {
 (5) At this point, we tested with random number between 0 - 100. Then we have to figure out how to use Nerosky Mindwave Data to processing. We install 2 Libraries for processing, one is WebSocket and the other is nerosky( You can clone the .jar file to the sketch so it can be installed directly.). Open the sketch we have in the repository and open your ThinkGear Connector (It works with bluetooth, you have to pair in RED light and connecing in still BLUE light). Run the sketch and see your attentionLevel and your meditationLevel.
 
 (6) Open the Unity and loading Echo.unity, click the "PLAY" button and see the data through Processing.(You have to keep the ThinkGear Connector, Processing Sketch and Unity on).
+
+##Step 3
+
+(1) We download the tutorial from http://blog.csdn.net/shenmifangke/article/details/50637074 which offer good way to play panoramic video in a sphere object.With a official MovieTexture, we can easily replace the video we took to the material. Assets we used: FirstPersonController, EchoTest(the one we created to connect neurosky).
+
+(2) We carefully made the after effects to the videos, which created 7 results with different effects, we thought this is the best way to create immersive effect.
+
+(3) We have to combine the neurosky Received data to control the videos.
+So we have to convert the String data to Int data. Import those videos to the materials, and those materials will apply to the "Sphere" with blend the material into a ball, we put the camera inside the Sphere, so this can create the cool immersive effect.
+AAA material means the 1st Material and the BBB,CCC,DDD means the other videos.
+````
+out_reply = Convert.ToInt32(reply);
+````
+
+Then our combination is here:
+````
+using UnityEngine;
+using System.Collections;
+using System;
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    public Material aaa;
+    public Material bbb;
+    public int result;
+    //public MovieTexture movie;
+    public int out_reply;
+
+    //把图片换成视频就能播放了
+    void Start()
+    {
+        //MovieTexture movie;
+        result = out_reply;
+        //result = UnityEngine.Random.Range(1, 100);
+
+    }
+
+    IEnumerator echoStart()
+    {
+        WebSocket w = new WebSocket(new Uri("ws://192.168.102.29:9091"));
+        yield return StartCoroutine(w.Connect());
+        w.SendString("Hi there");
+        int i = 0;
+        while (true)
+        {
+            string reply = w.RecvString();
+
+
+            if (reply != null)
+            {
+                Debug.Log("Received: " + reply);
+                out_reply = Convert.ToInt32(reply);
+                Debug.Log("Out_Received: " + out_reply);
+                w.SendString("Hi there" + i++);
+
+            }
+            if (w.error != null)
+            {
+                Debug.LogError("Error: " + w.error);
+                break;
+            }
+            yield return 0;
+        }
+        w.Close();
+    }
+
+
+    void Update()
+    {
+
+        MovieTexture movie;
+        if (result < 50)
+        {
+            if (aaa.mainTexture as MovieTexture)
+            {
+                movie = (MovieTexture)aaa.mainTexture;
+                movie.Play();
+            }
+        }
+        else
+        {
+            //movie.Stop();
+        }
+        if (result > 50)
+        {
+            if (bbb.mainTexture as MovieTexture)
+            {
+                movie = (MovieTexture)bbb.mainTexture;
+                movie.Play();
+            }
+        }
+        else
+        {
+           // movie.Stop();
+        }
+    }
+
+}
+````
+However, there is one problem, after we test with the code we've wrote and asked some teachers who can help us to switching videos with data, we still can't switch the videos.
+
+(4) Unity gives a good way to render the program, we can easily render the program with the official tools to create PC, IOS and Android program. You can download the source code and try to solve our problem!
+
+
+Thanks for watching!
